@@ -6,7 +6,7 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 10:54:14 by eagulov           #+#    #+#             */
-/*   Updated: 2019/02/23 21:54:04 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/02/24 18:25:13 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,23 @@ void	draw_y(t_point *pnt, int count, t_map *map)
 	}
 }
 
-void    connect_x(t_point *pnt, int i, t_map *map)
-{
-    int dx;
-    int dy;
-    int x;
-    int y;
+// void    connect_x(t_point *pnt, int i, t_map *map)
+// {
+//     int dx;
+//     int dy;
+//     int x;
+//     int y;
 
-    dx = pnt[i].x - pnt[i - 1].x;
-    dy = pnt[i].y - pnt[i - 1].y;
-    x = pnt[i - 1].x;
-    while (pnt[i].x > x)
-    {
-        y = pnt[i - 1].y + dy * (x - pnt[i - 1].x) / dx;
-        mlx_pixel_put(map->mlx_ptr, map->win_ptr, 500 + x, 200 + y, map->color = 0xb4354f);
-        x++;
-    }    
-}
+//     dx = pnt[i].x - pnt[i - 1].x;
+//     dy = pnt[i].y - pnt[i - 1].y;
+//     x = pnt[i - 1].x;
+//     while (pnt[i].x > x)
+//     {
+//         y = pnt[i - 1].y + dy * (x - pnt[i - 1].x) / dx;
+//         mlx_pixel_put(map->mlx_ptr, map->win_ptr, 500 + x, 200 + y, map->color = 0xb4354f);
+//         x++;
+//     }    
+// }
 
 void	connect_y(t_point *pnt, t_map *map)
 {
@@ -110,5 +110,32 @@ void	connect_y(t_point *pnt, t_map *map)
                 keep_draw(pnt, count, map);
         }
         count++;
+    }
+}
+
+void    connect_x(t_point *pnt, t_map *map)
+{
+    int dx;
+    int dy;
+    int x;
+    int y;
+
+    int i = 0;
+    while (i < map->total)
+    {
+		int col = i % map->width;
+		if (col > 0)
+		{
+			dx = pnt[i].x - pnt[i - 1].x;
+    		dy = pnt[i].y - pnt[i - 1].y;
+			x = pnt[i - 1].x;
+			while (pnt[i].x > x)
+			{
+				y = pnt[i - 1].y + dy * (x - pnt[i - 1].x) / dx;
+				mlx_pixel_put(map->mlx_ptr, map->win_ptr, 500 + x, 200 + y, map->color = 0xb4354f);
+				x++;
+			}  
+		}
+        i++;
     }
 }
