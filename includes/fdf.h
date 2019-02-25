@@ -6,7 +6,7 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 17:39:04 by eagulov           #+#    #+#             */
-/*   Updated: 2019/02/23 20:06:35 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/02/24 16:02:55 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef	struct	s_map
 }				t_map;
 
 void    trans_coords(int z, t_point *pnt, t_map *map, int i);
-void    coords(t_point *pnt, t_map *map, char *line);
+void    coords(t_point *pnt, t_map *map, char *line, int i);
 void    init_map(t_map *map, int x, int y);
 void	keep_draw(t_point *pnt, int count, t_map *map);
 void	draw_y(t_point *pnt, int count, t_map *map);
