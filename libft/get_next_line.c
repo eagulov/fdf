@@ -6,7 +6,7 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 18:44:41 by eagulov           #+#    #+#             */
-/*   Updated: 2019/02/21 20:42:51 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/02 18:21:05 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_read(int fd, char **text)
 {
-	int			len;
-	char		*tmp;
-	char		buf[BUFF_SIZE + 1];
+	int		len;
+	char	*tmp;
+	char	buf[BUFF_SIZE + 1];
 
 	ft_bzero(buf, BUFF_SIZE + 1);
 	len = read(fd, buf, BUFF_SIZE);
@@ -30,7 +30,7 @@ int	ft_read(int fd, char **text)
 	return (len);
 }
 
-int			ready(char **text, char **line, char *tmp)
+int	ready(char **text, char **line, char *tmp)
 {
 	int		check;
 	char	*new;
@@ -56,7 +56,7 @@ int			ready(char **text, char **line, char *tmp)
 	return (check);
 }
 
-int			get_next_line(const int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
 	int			len;
 	char		*tmp;

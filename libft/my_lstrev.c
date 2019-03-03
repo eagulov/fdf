@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_maximum.c                                       :+:      :+:    :+:   */
+/*   my_lstrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 15:54:38 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 18:00:22 by eagulov          ###   ########.fr       */
+/*   Created: 2019/03/02 17:40:45 by eagulov           #+#    #+#             */
+/*   Updated: 2019/03/02 18:03:06 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	my_maximum(int a, int b)
+void	my_lstrev(t_list **alst)
 {
-	return (a > b) ? a : b;
+	t_list *prev;
+	t_list *cur;
+	t_list *next;
+
+	prev = NULL;
+	cur = *alst;
+	while (cur != NULL)
+	{
+		next = cur->next;
+		cur->next = prev;
+		prev = cur;
+		cur = next;
+	}
+	*alst = prev;
 }

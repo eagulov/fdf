@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_maximum.c                                       :+:      :+:    :+:   */
+/*   my_ilerp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eagulov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 15:54:38 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 18:00:22 by eagulov          ###   ########.fr       */
+/*   Created: 2019/03/02 15:30:23 by eagulov           #+#    #+#             */
+/*   Updated: 2019/03/02 15:32:17 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	my_maximum(int a, int b)
+double	my_ilerp(double val, double first, double second)
 {
-	return (a > b) ? a : b;
+	if (val == first)
+		return (0.0);
+	if (val == second)
+		return (1.0);
+	return ((val - first) / (second - first));
 }

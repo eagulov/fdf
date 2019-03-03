@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_maximum.c                                       :+:      :+:    :+:   */
+/*   my_splitdel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eagulov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 15:54:38 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 18:00:22 by eagulov          ###   ########.fr       */
+/*   Created: 2019/03/02 15:12:37 by eagulov           #+#    #+#             */
+/*   Updated: 2019/03/02 15:27:12 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	my_maximum(int a, int b)
+int	my_splitdel(char ***split)
 {
-	return (a > b) ? a : b;
+	char	**str;
+	int		i;
+
+	i = 0;
+	str = *split;
+	while (*str)
+	{
+		ft_strdel(str);
+		i++;
+		str = &(*split)[i];
+	}
+	ft_memdel((void **)split);
+	return (0);
 }

@@ -6,18 +6,18 @@
 /*   By: eagulov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 12:47:11 by eagulov           #+#    #+#             */
-/*   Updated: 2019/02/17 12:47:42 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/02 18:15:37 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		my_sqrt(int num)
+int	my_sqrt(int num)
 {
 	int i;
 
 	i = 1;
-	while(i * i < num)
+	while (i * i < num)
 		++i;
 	return (i);
 }

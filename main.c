@@ -5,52 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/17 17:40:27 by eagulov           #+#    #+#             */
-/*   Updated: 2019/02/24 20:19:07 by eagulov          ###   ########.fr       */
+/*   Created: 2019/03/02 17:24:34 by eagulov           #+#    #+#             */
+/*   Updated: 2019/03/02 18:41:33 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
 
-// void	get_color(t_map *map, int z)
+// int		exit_response(char *reason)
 // {
-// 	if (z <= )
+// 	ft_putendl(reason);
+// 	return (1);
 // }
 
-int		press(int key, void *param)
+int main(int ac, char **av)
 {
-	(void)param;
-	if (key == 53)
-	{
-		exit(1);
-	}
-	return (0);
-}
+	t_map *map;
+	t_mlx *mlx;
+	int fd;
 
-int main(int argc, char **argv)
-{
-	int		fd;
-	t_map	*map;
-	t_point *pnt;
-	
-	if (argc != 2)
+	// if (ac < 2)
+	// 	return (exit_response("error: you didn't point to a file"));
+	if (ac != 2)
 		write(1, "Usage: ./fdf 'Expected file name'\n", 35);
-	else if ((fd = open(argv[1], O_RDONLY)) < 0)
-		return (-1);
-	else if (argc == 2)
-	{
-		map = (t_map *)malloc(sizeof(t_map));
-		map->mlx_ptr = mlx_init();
-		map->win_ptr = mlx_new_window(map->mlx_ptr, 1500, 1500, "yo");
-		get_map_info(map, fd);
-		pnt = main_helper(argv[1], map);
-		connect_x(pnt, map);
-		connect_y(pnt, map);
-		mlx_key_hook(map->win_ptr, press, (void *)0);
-		mlx_loop(map->mlx_ptr);
-		free(map);
-		free(pnt);
-	}
-	else
-		return (-1);
+	// fd = open(av[1], O_RDONLY);
+	// if (fd < 0 || !read_fdf(fd, &map))
+	// return (exit_response("error: fdf is wrong"));
+	if ((fd = open(av[1], O_RDONLY)) < 0)
+		write(1, "Error: 'fdf is wrong'\n", 23);
+	read_fdf(fd, &map);
+	if ((mlx = init(ft_strjoin("FdF - ", av[1]))) == NULL)
+		write(1, "Error: 'mlx couldn't init'\n", 28);
+	// return (exit_response("error: mlx couldn't init"));
+	mlx->map = map;
+	render(mlx);
+	mlx_key_hook(mlx->window, event_esc, mlx);
+	mlx_hook(mlx->window, 4, 0, event_mousedown, mlx);
+	mlx_hook(mlx->window, 5, 0, event_mouseup, mlx);
+	mlx_hook(mlx->window, 6, 0, event_mousemove, mlx);
+	mlx_loop(mlx->mlx);
+	return (0);
 }

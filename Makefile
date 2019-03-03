@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/17 17:38:17 by eagulov           #+#    #+#              #
-#    Updated: 2019/02/22 09:34:11 by eagulov          ###   ########.fr        #
+#    Created: 2019/03/02 17:43:20 by eagulov           #+#    #+#              #
+#    Updated: 2019/03/02 17:43:23 by eagulov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ all : $(NAME)
 
 $(NAME) : $(LIBFT) $(OBJ)
 		Make -C libft
-		Make -C minilibx
-		gcc -g -Wall -Werror -Wextra -I includes/fdf.h libft/libft.a -L ./minilibx \
+		Make -C miniLibX
+		gcc -g -Wall -Werror -Wextra -I includes/fdf.h libft/libft.a -L ./miniLibX \
 					-lmlx -framework OpenGL -framework AppKit $(SRC) -o $(NAME)
 
 			@echo "$(DAMN)Daaaaamn, it's compiled"

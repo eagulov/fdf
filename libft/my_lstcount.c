@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_maximum.c                                       :+:      :+:    :+:   */
+/*   my_lstcount.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 15:54:38 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 18:00:22 by eagulov          ###   ########.fr       */
+/*   Created: 2019/03/02 17:40:29 by eagulov           #+#    #+#             */
+/*   Updated: 2019/03/02 18:15:55 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	my_maximum(int a, int b)
+size_t	my_lstcount(t_list *lst)
 {
-	return (a > b) ? a : b;
+	size_t i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_maximum.c                                       :+:      :+:    :+:   */
+/*   my_lstadd_end.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 15:54:38 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 18:00:22 by eagulov          ###   ########.fr       */
+/*   Created: 2019/03/02 21:02:25 by eagulov           #+#    #+#             */
+/*   Updated: 2019/03/02 21:33:55 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	my_maximum(int a, int b)
+void my_lstadd_end(t_list **alst, t_list *new)
 {
-	return (a > b) ? a : b;
+	t_list *tmp;
+
+	tmp = *alst;
+	while (tmp->next)
+	{
+		tmp = tmp->next;
+	}
+	tmp->next = new;
 }
