@@ -6,20 +6,23 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 21:02:25 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 21:33:55 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/05 22:00:39 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void my_lstadd_end(t_list **alst, t_list *new)
+void	my_lstadd_end(t_list **alst, t_list *new)
 {
 	t_list *tmp;
 
 	tmp = *alst;
-	while (tmp->next)
+	if (tmp)
 	{
-		tmp = tmp->next;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-	tmp->next = new;
+	else
+		*alst = new;
 }

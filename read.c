@@ -6,13 +6,13 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 17:43:31 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 21:48:23 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/06 11:27:47 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
 
-static int clean_up(t_list **lst, t_map **map)
+static int	clean_up(t_list **lst, t_map **map)
 {
 	t_list *next;
 
@@ -31,39 +31,37 @@ static int clean_up(t_list **lst, t_map **map)
 	return (0);
 }
 
-static int get_lines(int fd, t_list **lst)
+static int	get_lines(int fd, t_list **lst)
 {
-	t_list *temp;
-	int expected;
-	char *line;
-	int ret;
+	t_list	*tmp;
+	int		expected;
+	char	*line;
+	int		ret;
 
 	expected = -1;
 	while ((ret = get_next_line(fd, &line)))
 	{
 		if (expected == -1)
 			expected = (int)my_count_words(line, ' ');
-		temp = ft_lstnew(line, ft_strlen(line) + 1);
-		// if ((temp) == NULL)
+		tmp = ft_lstnew(line, ft_strlen(line) + 1);
+		// if ((tmp) == NULL)
 		// 	return (clean_up(lst, NULL));
-		// my_lstadd_end(lst, temp);
-		ft_lstadd(lst, temp);
+		my_lstadd_end(lst, tmp);
 		// if (expected != (int)my_count_words(line, ' '))
 		// 	return (clean_up(lst, NULL));
 		ft_strdel(&line);
 	}
-	if (expected == -1 || ret == -1)
-		return (clean_up(lst, NULL));
-	my_lstrev(lst);
+	// if (expected == -1 || ret == -1)
+	// 	return (clean_up(lst, NULL));
 	return (1);
 }
 
-void find_depth(t_map *m)
+void		how_depth(t_map *m)
 {
-	int min;
-	int max;
-	t_vector v;
-	t_vector cur;
+	int		min;
+	int		max;
+	t_vectr	v;
+	t_vectr	cur;
 
 	min = INT_MAX;
 	max = INT_MIN;
@@ -86,12 +84,12 @@ void find_depth(t_map *m)
 	m->depth_max = max;
 }
 
-static int populate_map(t_map **m, t_list *list)
+static int	fill_map(t_map **m, t_list *list)
 {
-	t_list *lst;
-	char **split;
-	int x;
-	int y;
+	t_list	*lst;
+	char	**split;
+	int		x;
+	int		y;
 
 	lst = list;
 	y = 0;
@@ -109,13 +107,13 @@ static int populate_map(t_map **m, t_list *list)
 		lst = lst->next;
 		y++;
 	}
-	find_depth(*m);
+	how_depth(*m);
 	fill_gradient(*m);
 	clean_up(&list, NULL);
 	return (1);
 }
 
-int read_fdf(int fd, t_map **m)
+int			read_fdf(int fd, t_map **m)
 {
 	t_list *lst;
 
@@ -125,5 +123,5 @@ int read_fdf(int fd, t_map **m)
 	*m = get_map(my_count_words(lst->content, ' '), my_lstcount(lst));
 	if (*m == NULL)
 		return (clean_up(&lst, m));
-	return (populate_map(m, lst));
+	return (fill_map(m, lst));
 }

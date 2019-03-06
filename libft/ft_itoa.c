@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eagulov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 20:08:09 by eagulov           #+#    #+#             */
-/*   Updated: 2019/02/17 12:42:44 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/05 21:46:26 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char	*ft_itoa(int n)
 	int				col;
 	int				on;
 	char			*str;
-	unsigned int	temp;
+	unsigned int	tmp;
 
 	on = n < 0 ? 1 : 0;
 	col = n;
-	temp = (n < 0) ? (-n) : n;
+	tmp = (n < 0) ? (-n) : n;
 	while (n > 9 || n < -9)
 	{
 		on++;
@@ -32,8 +32,8 @@ char	*ft_itoa(int n)
 	str[on + 1] = '\0';
 	while (on > -1)
 	{
-		str[on--] = (temp % 10) + '0';
-		temp = temp / 10;
+		str[on--] = (tmp % 10) + '0';
+		tmp = tmp / 10;
 	}
 	str[0] = col < 0 ? '-' : str[0];
 	return (str);

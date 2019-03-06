@@ -6,13 +6,13 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 17:43:06 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 17:43:11 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/05 23:27:20 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
 
-int area(int x, int y)
+int		area(int x, int y)
 {
 	int c;
 
@@ -28,7 +28,7 @@ int area(int x, int y)
 	return (c);
 }
 
-void clip_xy(t_vector *v, t_vector *p1, t_vector *p2, int rout)
+void	clip_xy(t_vectr *v, t_vectr *p1, t_vectr *p2, int rout)
 {
 	if (rout & 1)
 	{
@@ -52,12 +52,12 @@ void clip_xy(t_vector *v, t_vector *p1, t_vector *p2, int rout)
 	}
 }
 
-int lineclip(t_vector *p1, t_vector *p2)
+int		clip_line(t_vectr *p1, t_vectr *p2)
 {
-	t_vector v;
-	int r1;
-	int r2;
-	int rout;
+	t_vectr	v;
+	int		r1;
+	int		r2;
+	int		rout;
 
 	r1 = area(p1->x, p1->y);
 	r2 = area(p2->x, p2->y);
