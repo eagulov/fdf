@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   window_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 17:44:28 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/06 11:16:20 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/06 20:35:44 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ t_mlx	*mlx_exit_clean(t_mlx *mlx)
 	return (NULL);
 }
 
-t_mlx	*init(char *title)
+t_mlx	*init(char *name)
 {
-	t_mlx *mlx;
+	char	*title;
+	t_mlx	*mlx;
 
+	title = ft_strjoin("FdF - /", name);
 	if ((mlx = ft_memalloc(sizeof(t_mlx))) == NULL)
 		return (NULL);
 	if ((mlx->mlx = mlx_init()) == NULL ||
@@ -44,6 +46,7 @@ t_mlx	*init(char *title)
 	mlx->view->scale = 20;
 	mlx->view->set_x = WIN_WIDTH / 2.3;
 	mlx->view->set_y = WIN_HEIGHT / 2.3;
+	free(title);
 	return (mlx);
 }
 

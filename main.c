@@ -6,7 +6,7 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 17:24:34 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/05 21:41:55 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/06 20:34:28 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
 		write(1, "Error: 'fdf is wrong'\n", 23);
 	read_fdf(fd, &map);
-	if ((mlx = init(ft_strjoin("FdF ", argv[1]))) == NULL)
+	if ((mlx = init(argv[1])) == NULL)
 		write(1, "Error: 'mlx couldn't initialize'\n", 34);
 	mlx->map = map;
 	perform(mlx);

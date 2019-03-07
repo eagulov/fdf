@@ -6,7 +6,7 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 17:43:31 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/06 11:27:47 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/06 21:38:34 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static int	get_lines(int fd, t_list **lst)
 		if (expected == -1)
 			expected = (int)my_count_words(line, ' ');
 		tmp = ft_lstnew(line, ft_strlen(line) + 1);
-		// if ((tmp) == NULL)
-		// 	return (clean_up(lst, NULL));
+		if ((tmp) == NULL)
+			return (clean_up(lst, NULL));
 		my_lstadd_end(lst, tmp);
-		// if (expected != (int)my_count_words(line, ' '))
-		// 	return (clean_up(lst, NULL));
+		if (expected != (int)my_count_words(line, ' '))
+			return (clean_up(lst, NULL));
 		ft_strdel(&line);
 	}
-	// if (expected == -1 || ret == -1)
-	// 	return (clean_up(lst, NULL));
+	if (expected == -1 || ret == -1)
+		return (clean_up(lst, NULL));
 	return (1);
 }
 

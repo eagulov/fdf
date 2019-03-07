@@ -6,79 +6,99 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 18:44:41 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/02 18:21:05 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/06 21:43:20 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_read(int fd, char **text)
+static void	init_buffers(char **b)
 {
-	int		len;
+	int		i;
+
+	i = -1;
+	while (++i < FD_LIMIT)
+		b[i] = NULL;
+}
+
+static int	read_file(const int fd, char **buffers)
+{
+	char	buff[BUFF_SIZE + 1];
 	char	*tmp;
-	char	buf[BUFF_SIZE + 1];
+	int		cursor;
+	int		buff_len;
 
-	ft_bzero(buf, BUFF_SIZE + 1);
-	len = read(fd, buf, BUFF_SIZE);
-	if (len == -1)
-		return (-1);
-	buf[len] = '\0';
-	tmp = *text;
-	*text = ft_strjoin(*text, buf);
-	if (*tmp != 0)
-		free(tmp);
-	return (len);
+	if ((cursor = read(fd, buff, BUFF_SIZE)) > 0)
+	{
+		buff[cursor] = '\0';
+		buff_len = buffers[fd] ? ft_strlen(buffers[fd]) : 0;
+		tmp = ft_strnew(buff_len + cursor);
+		buffers[fd] ? ft_strcat(tmp, buffers[fd]) : (void)0;
+		ft_strcat(tmp, buff);
+		tmp[buff_len + cursor] = '\0';
+		free(buffers[fd]);
+		buffers[fd] = tmp;
+	}
+	return (cursor);
 }
 
-int	ready(char **text, char **line, char *tmp)
+static int	read_line(const int fd, char **buffers)
 {
-	int		check;
-	char	*new;
+	int		nl;
+	int		cursor;
 
-	check = 0;
-	if (*tmp == '\n')
-		check = 1;
-	*tmp = 0;
-	*line = ft_strjoin("", *text);
-	if (!check)
+	cursor = read_file(fd, buffers);
+	if (!buffers[fd] && cursor <= 0)
+		return (-2);
+	while ((nl = my_strchri(buffers[fd], '\n')) < 0)
 	{
-		if (!(ft_strlen(*text)))
-			return (0);
-		else
-		{
-			*text = "\0";
-			return (1);
-		}
+		cursor = read_file(fd, buffers);
+		if (cursor <= 0)
+			return (nl);
 	}
-	new = *text;
-	*text = ft_strjoin(tmp + 1, "");
-	free(new);
-	return (check);
+	return (nl);
 }
 
-int	get_next_line(const int fd, char **line)
+char		*strncutout(char *src, char **dst, int size)
 {
-	int			len;
-	char		*tmp;
-	static char	*text[OPEN_MAX];
+	char	*tmp;
+	int		src_len;
 
-	if (!line || fd < 0 || BUFF_SIZE < 1 || fd > OPEN_MAX)
-		return (-1);
-	if (!text[fd])
-		text[fd] = "";
-	len = BUFF_SIZE;
-	while (line)
+	src_len = ft_strlen(src);
+	ft_strncpy(*dst, src, size);
+	(*dst)[size] = '\0';
+	tmp = (char *)malloc(sizeof(char) * (src_len - size + 1));
+	ft_strcpy(tmp, src + size + (size == src_len ? 0 : 1));
+	tmp[src_len - size] = '\0';
+	free(src);
+	return (tmp);
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	static char **buffers;
+	int			buff_len;
+	int			read;
+	int			nl;
+
+	if (fd < 0 || !line || fd > FD_LIMIT || BUFF_SIZE < 1)
+		return (EOF);
+	if (!buffers)
 	{
-		tmp = text[fd];
-		while (*tmp || len < BUFF_SIZE)
-		{
-			if (*tmp == '\n' || !(*tmp))
-				return (ready(&text[fd], line, tmp));
-			tmp++;
-		}
-		len = ft_read(fd, &text[fd]);
-		if (len == -1)
-			return (-1);
+		buffers = (char **)malloc(sizeof(char *) * FD_LIMIT);
+		init_buffers(buffers);
 	}
-	return (1);
+	nl = read_line(fd, buffers);
+	if (nl == -2)
+		return (EOF);
+	buff_len = buffers[fd] ? ft_strlen(buffers[fd]) : 0;
+	nl < 0 ? (nl = buff_len) : (void)0;
+	read = 0;
+	if (nl >= 0 && buff_len > 0)
+	{
+		*line = (char *)malloc(sizeof(char) * (nl + 1));
+		buffers[fd] = strncutout(buffers[fd], line, nl);
+		read = 1;
+	}
+	return (read);
 }

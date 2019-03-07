@@ -6,7 +6,7 @@
 #    By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/15 15:29:55 by eagulov           #+#    #+#              #
-#    Updated: 2019/03/02 18:33:18 by eagulov          ###   ########.fr        #
+#    Updated: 2019/03/06 19:45:46 by eagulov          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDE = libft.h
 all: $(NAME)
 
 $(NAME):
-	@gcc -c -Wall -Wextra -Werror $(SRC) -I $(INCLUDE)
+	@gcc -c -Wall -Wextra -Werror -g $(SRC) -I $(INCLUDE)
 	@ar rc $(NAME) $(OBJECTS)
 	@ranlib $(NAME)
 

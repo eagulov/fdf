@@ -6,7 +6,7 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 14:19:42 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/05 22:00:13 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/06 21:26:06 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@
 # include <sys/uio.h>
 # include <sys/types.h>
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 16
 # define DESC 10240
 # define MAX_FD 255
+# define FD_LIMIT 4986
 
 typedef struct		s_list
 {
@@ -35,6 +36,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					my_strchri(char *s, char c);
 void				my_lstadd_end(t_list **alst, t_list *new);
 int					my_abs(int i);
 double				my_ilerp(double val, double first, double second);
