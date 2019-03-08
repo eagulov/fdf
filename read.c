@@ -6,7 +6,7 @@
 /*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/02 17:43:31 by eagulov           #+#    #+#             */
-/*   Updated: 2019/03/06 21:38:34 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/07 16:07:28 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	get_lines(int fd, t_list **lst)
 	int		ret;
 
 	expected = -1;
-	while ((ret = get_next_line(fd, &line)))
+	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (expected == -1)
 			expected = (int)my_count_words(line, ' ');

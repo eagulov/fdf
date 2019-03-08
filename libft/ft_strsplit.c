@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eagulov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: eagulov <eagulov@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 09:48:28 by eagulov           #+#    #+#             */
-/*   Updated: 2018/12/18 17:47:52 by eagulov          ###   ########.fr       */
+/*   Updated: 2019/03/07 18:41:53 by eagulov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static size_t	my_count(char const *s, char c)
-{
-	size_t cnt;
-
-	cnt = 0;
-	while (*s)
-	{
-		if (*s != c && (*(s + 1) == c || *(s + 1) == '\0'))
-			cnt++;
-		s++;
-	}
-	return (cnt);
-}
 
 static size_t	my_length(char const *str, char c)
 {
@@ -48,7 +34,7 @@ char			**ft_strsplit(char const *s, char c)
 	i = 0;
 	if (!s || !c)
 		return ((void *)0);
-	words = my_count(s, c);
+	words = my_count_words(s, c);
 	if (!(tab = (char **)malloc(sizeof(char *) * (words + 1))))
 		return (NULL);
 	while (i < words)
